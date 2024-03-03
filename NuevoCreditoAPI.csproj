@@ -17,18 +17,4 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="NuevoCredito\Controllers\" />
-      <Folder Include="NuevoCredito\Domain\Repositories\" />
-      <Folder Include="NuevoCredito\Domain\Services\Communication\" />
-      <Folder Include="NuevoCredito\Mapping\" />
-      <Folder Include="NuevoCredito\Persistence\" />
-      <Folder Include="NuevoCredito\Resources\" />
-      <Folder Include="NuevoCredito\Services\" />
-      <Folder Include="Shared\Domain\Services\Communication\" />
-      <Folder Include="Shared\Extensions\" />
-      <Folder Include="Shared\Persistence\Contexts\" />
-      <Folder Include="Shared\Persistence\Repositories\" />
-    </ItemGroup>
-
 </Project>
