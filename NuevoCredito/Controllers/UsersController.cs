@@ -12,11 +12,13 @@ namespace NuevoCreditoAPI.NuevoCredito.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly IPaymentScheduleService _paymentScheduleService;
     private readonly IMapper _mapper;
 
-    public UsersController(IUserService userService, IMapper mapper)
+    public UsersController(IUserService userService, IPaymentScheduleService paymentScheduleService, IMapper mapper)
     {
         _userService = userService;
+        _paymentScheduleService = paymentScheduleService;
         _mapper = mapper;
     }
 
@@ -83,5 +85,19 @@ public class UsersController : ControllerBase
         var userResource = _mapper.Map<User, UserResource>(user);
 
         return Ok(userResource);
+    }
+
+    [HttpGet("{id}/payment-schedules")]
+    public async Task<IActionResult> GetAllPaymentSchedulesAsync(int id)
+    {
+        var paymentSchedules = await _paymentScheduleService.ListByUserIdAsync(id);
+
+        if (paymentSchedules.Count() == 0)
+            return NotFound($"No existing payment schedules for user {id}");
+
+        var paymentScheduleResource =
+            _mapper.Map<IEnumerable<PaymentSchedule>, IEnumerable<PaymentScheduleResource>>(paymentSchedules);
+
+        return Ok(paymentScheduleResource);
     }
 }

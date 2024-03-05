@@ -20,7 +20,7 @@ public class PaymentSchedulesController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpGet("{userId}/payment-schedules")]
+    /*[HttpGet("user/{userId}/schedules")]
     public async Task<IActionResult> GetAllByUserIdAsync(int userId)
     {
         var paymentSchedules = await _paymentScheduleService.ListByUserIdAsync(userId);
@@ -31,7 +31,7 @@ public class PaymentSchedulesController : ControllerBase
         var paymentScheduleResource = _mapper.Map<IEnumerable<PaymentSchedule>, IEnumerable<PaymentScheduleResource>>(paymentSchedules);
 
         return Ok(paymentScheduleResource);
-    }
+    }*/
 
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] SavePaymentScheduleResource resource)
