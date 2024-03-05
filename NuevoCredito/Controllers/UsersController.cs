@@ -38,12 +38,12 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(int id, [FromBody] SaveUserResource resource)
+    public async Task<IActionResult> PutAsync(int id, [FromBody] UpdateUserResource resource)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState.GetErrorMessages());
 
-        var user = _mapper.Map<SaveUserResource, User>(resource);
+        var user = _mapper.Map<UpdateUserResource, User>(resource); //VERIFICAR SI FUNCIONA
         var result = await _userService.UpdateAsync(id, user);
 
         if (!result.Success)
@@ -80,7 +80,7 @@ public class UsersController : ControllerBase
             return NotFound("Jugador no encontrado con las credenciales proporcionadas.");
         }
 
-        var userResource = _mapper.Map<User, UserResource>(jugador);
+        var userResource = _mapper.Map<User, UserResource>(user);
 
         return Ok(userResource);
     }
