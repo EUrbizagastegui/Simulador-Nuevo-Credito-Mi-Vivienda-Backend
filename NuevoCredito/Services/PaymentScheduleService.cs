@@ -8,11 +8,13 @@ namespace NuevoCreditoAPI.NuevoCredito.Services;
 public class PaymentScheduleService : IPaymentScheduleService
 {
     private readonly IPaymentScheduleRepository _paymentScheduleRepository;
+    private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public PaymentScheduleService(IPaymentScheduleRepository paymentScheduleRepository, IUnitOfWork unitOfWork)
+    public PaymentScheduleService(IPaymentScheduleRepository paymentScheduleRepository, IUserRepository userRepository, IUnitOfWork unitOfWork)
     {
         _paymentScheduleRepository = paymentScheduleRepository;
+        _userRepository = userRepository;
         _unitOfWork = unitOfWork;
     }
 
@@ -23,6 +25,11 @@ public class PaymentScheduleService : IPaymentScheduleService
 
     public async Task<PaymentScheduleResponse> SaveAsync(PaymentSchedule paymentSchedule)
     {
+        var existingUser = await _userRepository.FindByIdAsync(paymentSchedule.UserId);
+        
+        if (existingUser == null)
+            return new PaymentScheduleResponse("User not found. It may not exist.");
+        
         try
         {
             await _paymentScheduleRepository.AddAsync(paymentSchedule);

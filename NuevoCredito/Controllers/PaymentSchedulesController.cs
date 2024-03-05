@@ -14,19 +14,23 @@ public class PaymentSchedulesController : ControllerBase
     private readonly IPaymentScheduleService _paymentScheduleService;
     private readonly IMapper _mapper;
 
-    public PaymentSchedulesController(IPaymentScheduleService paymentScheduleService, Mapper mapper)
+    public PaymentSchedulesController(IPaymentScheduleService paymentScheduleService, IMapper mapper)
     {
         _paymentScheduleService = paymentScheduleService;
         _mapper = mapper;
     }
 
-    [HttpGet("{userId}/characters")] //GetByUserId
-    public async Task<IEnumerable<PaymentScheduleResource>> GetAllByUserIdAsync(int userId)
+    [HttpGet("{userId}/payment-schedules")]
+    public async Task<IActionResult> GetAllByUserIdAsync(int userId)
     {
         var paymentSchedules = await _paymentScheduleService.ListByUserIdAsync(userId);
-        var resources = _mapper
-            .Map<IEnumerable<PaymentSchedule>, IEnumerable<PaymentScheduleResource>>(paymentSchedules);
-        return resources;
+
+        if (paymentSchedules.Count() == 0)
+            return NotFound($"No existing payment schedules for user {userId}");
+
+        var paymentScheduleResource = _mapper.Map<IEnumerable<PaymentSchedule>, IEnumerable<PaymentScheduleResource>>(paymentSchedules);
+
+        return Ok(paymentScheduleResource);
     }
 
     [HttpPost]
@@ -52,7 +56,7 @@ public class PaymentSchedulesController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState.GetErrorMessages());
 
-        var paymentSchedule = _mapper.Map<UpdatePaymentScheduleResource, PaymentSchedule>(resource); //VERIFICAR SI FUNCIONA
+        var paymentSchedule = _mapper.Map<UpdatePaymentScheduleResource, PaymentSchedule>(resource);
         var result = await _paymentScheduleService.UpdateAsync(id, paymentSchedule);
 
         if (!result.Success)

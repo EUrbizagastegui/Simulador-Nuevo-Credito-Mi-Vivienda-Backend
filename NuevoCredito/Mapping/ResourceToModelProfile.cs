@@ -9,8 +9,8 @@ public class ResourceToModelProfile : Profile
     public ResourceToModelProfile()
     {
         CreateMap<SaveUserResource, User>();
-        CreateMap<UpdateUserResource, User>(); //VERIFICAR SI FUNCIONA
+        CreateMap<UpdateUserResource, User>();
         CreateMap<SavePaymentScheduleResource, PaymentSchedule>();
-        CreateMap<UpdatePaymentScheduleResource, PaymentSchedule>(); //VERIFICAR SI FUNCIONA
+        CreateMap<UpdatePaymentScheduleResource, PaymentSchedule>();
     }
 }

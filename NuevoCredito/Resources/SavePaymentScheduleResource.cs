@@ -5,16 +5,16 @@ public class SavePaymentScheduleResource
     public string Currency { get; set; }
     public string DisbursementDate { get; set; }
     public string PaymentDay { get; set; }
-    public string Amount { get; set; }
-    public string PropertyValue { get; set; }
-    public string TEA { get; set; }
-    public string FeesPerYear { get; set; }
-    public string GracePeriod { get; set; }
-    public string PaymentPeriod { get; set; }
-    public string TotalTerm { get; set; }
-    public string DesgravamenInsuranceRate { get; set; }
-    public string PropertyInsuranceRate { get; set; }
-    public string Postage { get; set; }
+    public int Amount { get; set; }
+    public int PropertyValue { get; set; }
+    public double TEA { get; set; }
+    public int FeesPerYear { get; set; }
+    public int GracePeriod { get; set; }
+    public int PaymentPeriod { get; set; }
+    public int TotalTerm { get; set; }
+    public double DesgravamenInsuranceRate { get; set; }
+    public double PropertyInsuranceRate { get; set; }
+    public double Postage { get; set; }
 
     public int UserId { get; set; }
 }

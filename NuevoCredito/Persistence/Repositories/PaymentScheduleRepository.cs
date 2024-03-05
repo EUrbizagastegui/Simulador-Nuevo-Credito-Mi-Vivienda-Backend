@@ -34,12 +34,6 @@ public class PaymentScheduleRepository : BaseRepository, IPaymentScheduleReposit
             .Where(p => p.UserId == userId)
             .Include(p => p.User)
             .ToListAsync();
-
-        /*var paymentSchedules = await _context.PaymentSchedules
-            .Where(p => p.UserId == userId)
-            .ToListAsync();
-
-        return paymentSchedules;*/
     }
 
     public async Task<PaymentSchedule> FindByIdAsync(int paymentScheduleId)
