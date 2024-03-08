@@ -66,7 +66,8 @@ app.UseCors(builder =>
         .AllowAnyMethod()
         .WithOrigins(
             "http://localhost:5173",
-            "https://localhost:5173"
+            "https://localhost:5173",
+            "https://www.simuladornuevocredito.vercel.app"
         )
     );
 
